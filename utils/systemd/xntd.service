@@ -1,0 +1,17 @@
+[Unit]
+Description=Interama XNT service
+After=network.target
+
+[Service]
+Type=oneshot
+User=Interama
+Group=Interama
+PermissionsStartOnly=true
+RemainAfterExit=yes
+ExecStartPre=-/bin/mkdir -p /var/run/Interama
+ExecStartPre=/bin/chown -R Interama:Interama /var/run/Interama/
+ExecStart=/usr/lib/Interama/xntd.sh --start
+ExecStop=/usr/lib/Interama/xntd.sh --stop
+
+[Install]
+WantedBy=multi-user.target
